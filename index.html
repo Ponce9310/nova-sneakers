@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NOVA SNEAKERS | Inicio</title>
+    <link rel="stylesheet" href="css/estilos.css">
+</head>
+<body class="home-referencia"><a href="#main" class="skip-link">Saltar al contenido principal</a>
+<header class="encabezado home-header">
+    <div class="contenedor barra-navegacion">
+        <a href="index.html" class="logo" aria-label="NOVA SNEAKERS, inicio">NOVA <span>SNEAKERS</span></a>
+        <button type="button" class="menu-toggle" id="menu-toggle" aria-label="Abrir menú" aria-expanded="false" aria-controls="menu-principal"><span></span><span></span><span></span></button><nav class="menu-principal" id="menu-principal" aria-label="Navegación principal">
+            <a href="index.html" class="activo">Inicio</a>
+            <a href="productos.html">Productos</a>
+            <a href="nosotros.html">Nosotros</a>
+            <a href="blog.html">Blog</a>
+            <a href="contacto.html">Contacto</a>
+        </nav>
+        <div class="acciones-navegacion">
+            <div class="busqueda-header">
+                <button type="button" class="icono-busqueda" id="boton-busqueda" aria-label="Buscar productos" title="Buscar productos" aria-expanded="false" aria-controls="panel-busqueda">⌕</button>
+                <div class="panel-busqueda" id="panel-busqueda" hidden>
+                    <form id="form-busqueda-header" class="form-busqueda-header">
+                        <label for="input-busqueda-header" class="sr-only">Buscar productos</label>
+                        <input id="input-busqueda-header" type="search" placeholder="Buscar zapatillas..." autocomplete="off">
+                        <button type="submit">Buscar</button>
+                    </form>
+                </div>
+            </div>
+            <button type="button" class="boton-carrito" aria-label="Abrir resumen del carrito" aria-haspopup="dialog" aria-expanded="false">🛒 <span id="contador-carrito">0</span></button>
+            <a href="login.html" class="enlace-login" data-cuenta-link>Iniciar sesión</a>
+        </div>
+    </div>
+</header>
+
+<main id="main">
+    <!-- Hero visual basado en la referencia entregada por el usuario. Las fotografías son recortes individuales. -->
+    <section class="hero-referencia" aria-label="Presentación de NOVA SNEAKERS">
+        <div class="hero-ref-main">
+            <img src="img/home/ref-hero-main.jpg" alt="Presentación visual NOVA SNEAKERS" fetchpriority="high">
+            <!-- El botón es HTML real y queda sobre la zona del botón de la imagen de referencia. -->
+            <a href="productos.html" class="hero-ref-link" aria-label="Ver productos"></a>
+        </div>
+        <div class="hero-ref-side">
+            <a href="productos.html" class="hero-ref-panel hero-ref-shoe" aria-label="Ver productos">
+                <img src="img/home/ref-hero-side-shoe.jpg" alt="Zapatillas NOVA SNEAKERS" fetchpriority="high">
+            </a>
+            <a href="nosotros.html" class="hero-ref-panel hero-ref-store" aria-label="Conocer NOVA SNEAKERS">
+                <img src="img/home/ref-hero-side-store.jpg" alt="Interior de NOVA SNEAKERS" fetchpriority="high">
+            </a>
+        </div>
+    </section>
+
+    <section class="home-ref-productos" aria-labelledby="titulo-destacados">
+        <div class="contenedor">
+            <div class="home-ref-heading">
+                <div>
+                    <h1 id="titulo-destacados">Productos destacados</h1>
+                    <p>Descubre algunos de nuestros modelos más populares.</p>
+                </div>
+                <a href="productos.html" class="home-ref-ver-todos">Ver todos los productos <span>→</span></a>
+            </div>
+
+            <div class="home-ref-shop-grid">
+                <div id="productos-destacados" class="home-ref-product-grid"></div>
+
+                <aside class="home-ref-community" aria-label="Comunidad NOVA SNEAKERS">
+                    <div class="community-top">
+                        <h2>ÚNETE A<br>NUESTRA COMUNIDAD</h2>
+                        <p>Novedades, lanzamientos y más.</p>
+                        <form class="community-form" onsubmit="return false;">
+                            <label for="correo-comunidad" class="sr-only">Correo electrónico</label>
+                            <input id="correo-comunidad" type="email" placeholder="Tu correo electrónico" maxlength="100">
+                            <button type="submit">Suscribirme</button>
+                        </form>
+                    </div>
+                    <a href="blog.html" class="community-image-link" aria-label="Explorar el blog">
+                        <img src="img/home/ref-community-card.jpg" alt="NOVA SNEAKERS, estilo comunidad y movimiento" loading="lazy">
+                    </a>
+                </aside>
+            </div>
+        </div>
+    </section>
+
+    <section class="home-ref-beneficios" aria-label="Beneficios de NOVA SNEAKERS">
+        <div class="contenedor home-ref-beneficios-grid">
+            <div><span class="beneficio-ref-icon">♜</span><div><strong>Calidad garantizada</strong><small>Solo los mejores materiales</small></div></div>
+            <div><span class="beneficio-ref-icon">⌁</span><div><strong>Estilo único</strong><small>Diseños que destacan</small></div></div>
+            <div><span class="beneficio-ref-icon">♡</span><div><strong>Comunidad</strong><small>Sneakers que nos conectan</small></div></div>
+            <div><span class="beneficio-ref-icon">∞</span><div><strong>Pasión sin límites</strong><small>Porque las zapatillas son más que moda</small></div></div>
+        </div>
+    </section>
+</main>
+
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+    const botonBusqueda = document.getElementById("boton-busqueda");
+    const panelBusqueda = document.getElementById("panel-busqueda");
+    const inputBusqueda = document.getElementById("input-busqueda-header");
+    const formularioBusqueda = document.getElementById("form-busqueda-header");
+
+    if (!botonBusqueda || !panelBusqueda || !inputBusqueda || !formularioBusqueda) return;
+
+    function cerrarBusqueda() {
+        panelBusqueda.hidden = true;
+        botonBusqueda.setAttribute("aria-expanded", "false");
+    }
+
+    botonBusqueda.addEventListener("click", function (evento) {
+        evento.stopPropagation();
+        const abrir = panelBusqueda.hidden;
+        panelBusqueda.hidden = !abrir;
+        botonBusqueda.setAttribute("aria-expanded", String(abrir));
+        if (abrir) inputBusqueda.focus();
+    });
+
+    panelBusqueda.addEventListener("click", function (evento) {
+        evento.stopPropagation();
+    });
+
+    formularioBusqueda.addEventListener("submit", function (evento) {
+        evento.preventDefault();
+        const texto = inputBusqueda.value.trim();
+        window.location.href = texto
+            ? "productos.html?q=" + encodeURIComponent(texto)
+            : "productos.html?buscar=1";
+    });
+
+    document.addEventListener("click", cerrarBusqueda);
+    document.addEventListener("keydown", function (evento) {
+        if (evento.key === "Escape") cerrarBusqueda();
+    });
+});
+</script>
+
+<footer class="pie-pagina home-ref-footer">
+    <div class="contenedor pie-contenido">
+        <div><a href="index.html" class="logo logo-footer">NOVA <span>SNEAKERS</span></a><p>Tienda online de zapatillas urbanas y deportivas.</p></div>
+        <div class="pie-enlaces"><a href="nosotros.html">Nosotros</a><a href="blog.html">Blog</a><a href="contacto.html">Contacto</a><a href="favoritos.html">Favoritos</a></div>
+    </div>
+    <div class="contenedor copyright"><p>&copy; 2026 NOVA SNEAKERS. Proyecto académico DSY1104.</p></div>
+</footer>
+
+<script src="js/productos.js"></script>
+<script src="js/carrito.js"></script>
+<script src="js/inicio.js"></script>
+<script src="js/usuarios.js"></script><script src="js/header.js"></script><script src="js/favoritos.js"></script><script src="js/menu.js"></script></body>
+</html>
