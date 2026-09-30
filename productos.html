@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NOVA SNEAKERS | Productos</title>
+    <link rel="stylesheet" href="css/estilos.css">
+</head>
+<body><a href="#main" class="skip-link">Saltar al contenido principal</a>
+
+    <header class="encabezado">
+        <div class="contenedor barra-navegacion">
+            <a href="index.html" class="logo">NOVA <span>SNEAKERS</span></a>
+
+            <button type="button" class="menu-toggle" id="menu-toggle" aria-label="Abrir menú" aria-expanded="false" aria-controls="menu-principal"><span></span><span></span><span></span></button><nav class="menu-principal" id="menu-principal" aria-label="Navegación principal">
+                <a href="index.html">Inicio</a>
+                <a href="productos.html" class="activo">Productos</a>
+                <a href="nosotros.html">Nosotros</a>
+                <a href="blog.html">Blog</a>
+                <a href="contacto.html">Contacto</a>
+            </nav>
+
+            <div class="acciones-navegacion">
+                <a href="login.html" class="enlace-login" data-cuenta-link>Iniciar sesión</a>
+                <button type="button" class="boton-carrito" aria-label="Abrir resumen del carrito" aria-haspopup="dialog" aria-expanded="false">
+                    <span class="icono-carrito" aria-hidden="true">🛒</span> Carrito <span id="contador-carrito">0</span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <main id="main">
+        <section class="encabezado-pagina catalogo-encabezado">
+            <div class="contenedor">
+                <p class="etiqueta">COLECCIÓN NOVA</p>
+                <h1>Encuentra tu próximo par favorito.</h1>
+                <p>Modelos urbanos y deportivos seleccionados para acompañar tu estilo y movimiento.</p>
+            </div>
+        </section>
+
+        <section class="seccion catalogo">
+            <div class="contenedor">
+                <div class="catalogo-herramientas">
+                    <div class="filtros-catalogo-bloque">
+                        <div class="filtros-publico" aria-label="Filtrar por público">
+                            <span class="titulo-filtro">Colección</span>
+                            <button type="button" class="filtro-categoria activo" data-publico="Todos">Todos</button>
+                            <button type="button" class="filtro-categoria" data-publico="Unisex">Unisex</button>
+                            <button type="button" class="filtro-categoria" data-publico="Mujer">Mujer</button>
+                            <button type="button" class="filtro-categoria" data-publico="Niños">Niños</button>
+                        </div>
+                        <div class="filtros-categoria" aria-label="Filtrar por tipo de zapatilla">
+                            <span class="titulo-filtro">Tipo</span>
+                            <button type="button" class="filtro-categoria activo" data-categoria="Todos">Todos</button>
+                            <button type="button" class="filtro-categoria" data-categoria="Running">Running</button>
+                            <button type="button" class="filtro-categoria" data-categoria="Urbanas">Urbanas</button>
+                            <button type="button" class="filtro-categoria" data-categoria="Basketball">Basketball</button>
+                            <button type="button" class="filtro-categoria" data-categoria="Training">Training</button>
+                        </div>
+                    </div>
+                    <label class="buscador-catalogo">
+                        <span class="sr-only">Buscar productos</span>
+                        <input id="buscar-producto" type="search" placeholder="Buscar producto o código..." autocomplete="off">
+                    </label>
+                    <div class="orden-catalogo"><label for="orden-productos">Ordenar</label><select id="orden-productos"><option value="relevancia">Relevancia</option><option value="precio-menor">Precio menor a mayor</option><option value="precio-mayor">Precio mayor a menor</option><option value="stock">Mayor disponibilidad</option></select></div>
+                </div>
+
+                <div class="carrusel-productos" aria-label="Carrusel de productos">
+                    <button type="button" class="flecha-carrusel flecha-anterior" id="anterior-productos" aria-label="Productos anteriores">‹</button>
+                    <div class="ventana-carrusel">
+                        <div id="lista-productos" class="grid-productos carrusel-pista">
+                            <!-- Los productos se generan mediante JavaScript. -->
+                        </div>
+                    </div>
+                    <button type="button" class="flecha-carrusel flecha-siguiente" id="siguiente-productos" aria-label="Productos siguientes">›</button>
+                </div>
+
+                <div id="indicadores-carrusel" class="indicadores-carrusel" aria-label="Páginas del catálogo"></div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="pie-pagina">
+        <div class="contenedor pie-contenido">
+            <div>
+                <a href="index.html" class="logo logo-footer">NOVA <span>SNEAKERS</span></a>
+                <p>Tienda online de zapatillas urbanas y deportivas.</p>
+            </div>
+
+            <div class="pie-enlaces">
+                <a href="nosotros.html">Nosotros</a>
+                <a href="blog.html">Blog</a>
+                <a href="contacto.html">Contacto</a>
+            </div>
+        </div>
+
+        <div class="contenedor copyright">
+            <p>&copy; 2026 NOVA SNEAKERS. Proyecto académico DSY1104.</p>
+        </div>
+    </footer>
+
+    <script src="js/productos.js"></script>
+<script src="js/carrito.js"></script>
+<script src="js/usuarios.js"></script><script src="js/header.js"></script><script src="js/favoritos.js"></script><script src="js/menu.js"></script></body>
+</html>
