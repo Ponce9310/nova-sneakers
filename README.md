@@ -19,13 +19,13 @@ Proyecto académico DSY1104.
 Esta versión sigue siendo frontend. No realiza pagos reales, no utiliza backend/base de datos y no implementa autenticación de servidor. Los pedidos y usuarios se mantienen con localStorage para la demostración académica.
 
 
-## Corrección V9.2 — Despacho / Comunas
+## Corrección — Despacho / Comunas
 - El selector de comuna ahora se actualiza al cambiar la región en el checkout.
 - La comuna permanece deshabilitada hasta seleccionar una región.
 - Si existe una sesión con región y comuna guardadas, ambas se precargan correctamente.
 - Se mantiene la validación obligatoria de región y comuna antes de confirmar la compra simulada.
 
-## Actualización V19 — Catálogo ampliado y experiencia de compra
+## Actualización — Catálogo ampliado y experiencia de compra
 
 - Catálogo ampliado a 44 productos de demostración: 12 Unisex, 16 Mujer y 16 Niños.
 - 12 productos Unisex existentes.
