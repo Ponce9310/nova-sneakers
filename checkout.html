@@ -1,1 +1,164 @@
-<!DOCTYPE html><html lang="es"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>NOVA SNEAKERS | Finalizar compra</title><link rel="stylesheet" href="css/estilos.css"></head><body><a href="#main" class="skip-link">Saltar al contenido principal</a><header class="encabezado"><div class="contenedor barra-navegacion"><a href="index.html" class="logo">NOVA <span>SNEAKERS</span></a><button type="button" class="menu-toggle" id="menu-toggle" aria-label="Abrir menú" aria-expanded="false" aria-controls="menu-principal"><span></span><span></span><span></span></button><nav class="menu-principal" id="menu-principal" aria-label="Navegación principal"><a href="index.html">Inicio</a><a href="productos.html">Productos</a><a href="nosotros.html">Nosotros</a><a href="blog.html">Blog</a><a href="contacto.html">Contacto</a></nav><div class="acciones-navegacion"><a href="login.html" class="enlace-login" data-cuenta-link>Iniciar sesión</a><button type="button" class="boton-carrito" aria-label="Abrir resumen del carrito" aria-haspopup="dialog" aria-expanded="false"><span class="icono-carrito" aria-hidden="true">🛒</span> Carrito <span id="contador-carrito">0</span></button></div></div></header><main id="main"><section class="encabezado-pagina"><div class="contenedor"><p class="etiqueta">CHECKOUT</p><h1>Finalizar compra</h1><p>Completa tus datos para registrar una compra simulada.</p></div></section><section class="seccion"><div class="contenedor checkout-grid"><form id="formulario-checkout" class="formulario checkout-form" novalidate><div class="checkout-seccion"><h2>1. Datos de contacto</h2><div class="grid-formulario"><div class="campo campo-completo"><label for="nombre">Nombre completo *</label><input id="nombre" required maxlength="150"><small id="nombre-error" class="error"></small></div><div class="campo campo-completo"><label for="correo">Correo *</label><input id="correo" type="email" maxlength="100"><small id="correo-error" class="error"></small></div></div></div><div class="checkout-seccion"><h2>2. Despacho</h2><div class="grid-formulario"><div class="campo"><label for="region">Región *</label><select id="region"><option value="">Selecciona una región</option></select><small id="region-error" class="error"></small></div><div class="campo"><label for="comuna">Comuna *</label><select id="comuna"><option value="">Selecciona una comuna</option></select><small id="comuna-error" class="error"></small></div><div class="campo campo-completo"><label for="direccion">Dirección *</label><textarea id="direccion" maxlength="300" rows="3"></textarea><small id="direccion-error" class="error"></small></div></div></div><div class="checkout-seccion"><h2>3. Método de pago</h2><div class="campo"><label for="metodo-pago">Selecciona una opción *</label><select id="metodo-pago"><option value="">Selecciona</option><option value="Tarjeta (simulado)">Tarjeta (simulado)</option><option value="Transferencia (simulado)">Transferencia (simulado)</option></select><small id="metodo-pago-error" class="error"></small><p class="texto-ayuda">No se realiza ningún cobro real en esta versión académica.</p></div><label class="check-line"><input id="terminos" type="checkbox"> Acepto las condiciones de la compra simulada.</label><small id="terminos-error" class="error"></small></div><p id="mensaje-checkout" class="mensaje-formulario"></p><div class="acciones-checkout"><a href="carrito.html" class="boton boton-secundario">← Volver al carrito</a><button type="submit" class="boton boton-principal">Confirmar compra</button></div></form><aside id="checkout-resumen-box" class="checkout-resumen"><h2>Resumen</h2><div id="resumen-checkout"></div><div class="checkout-total"><span>Total</span><strong id="total-checkout">$0</strong></div></aside><section id="confirmacion-checkout" class="confirmacion-checkout oculto"></section></div></section></main><footer class="pie-pagina"><div class="contenedor pie-contenido"><div><a href="index.html" class="logo logo-footer">NOVA <span>SNEAKERS</span></a><p>Tienda online de zapatillas urbanas y deportivas.</p></div><div class="pie-enlaces"><a href="nosotros.html">Nosotros</a><a href="blog.html">Blog</a><a href="contacto.html">Contacto</a></div></div><div class="contenedor copyright"><p>&copy; 2026 NOVA SNEAKERS. Proyecto académico DSY1104.</p></div></footer><script src="js/usuarios.js"></script><script src="js/productos.js"></script><script src="js/pedidos.js"></script><script src="js/validaciones.js"></script><script src="js/carrito.js"></script><script src="js/checkout.js"></script><script src="js/header.js"></script><script src="js/menu.js"></script></body></html>
+<!doctype html>
+<html lang="es">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>NOVA SNEAKERS | Finalizar compra</title>
+        <link rel="stylesheet" href="css/estilos.css" />
+    </head>
+    <body>
+        <a href="#main" class="skip-link">Saltar al contenido principal</a>
+        <header class="encabezado">
+            <div class="contenedor barra-navegacion">
+                <a href="index.html" class="logo">
+                    NOVA
+                    <span>SNEAKERS</span>
+                </a>
+                <button
+                    type="button"
+                    class="menu-toggle"
+                    id="menu-toggle"
+                    aria-label="Abrir menú"
+                    aria-expanded="false"
+                    aria-controls="menu-principal"
+                >
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+                <nav class="menu-principal" id="menu-principal" aria-label="Navegación principal">
+                    <a href="index.html">Inicio</a>
+                    <a href="productos.html">Productos</a>
+                    <a href="nosotros.html">Nosotros</a>
+                    <a href="blog.html">Blog</a>
+                    <a href="contacto.html">Contacto</a>
+                </nav>
+                <div class="acciones-navegacion">
+                    <a href="login.html" class="enlace-login" data-cuenta-link>Iniciar sesión</a>
+                    <button
+                        type="button"
+                        class="boton-carrito"
+                        aria-label="Abrir resumen del carrito"
+                        aria-haspopup="dialog"
+                        aria-expanded="false"
+                    >
+                        <span class="icono-carrito" aria-hidden="true">🛒</span>
+                        Carrito
+                        <span id="contador-carrito">0</span>
+                    </button>
+                </div>
+            </div>
+        </header>
+        <main id="main">
+            <section class="encabezado-pagina">
+                <div class="contenedor">
+                    <p class="etiqueta">CHECKOUT</p>
+                    <h1>Finalizar compra</h1>
+                    <p>Completa tus datos para registrar una compra simulada.</p>
+                </div>
+            </section>
+            <section class="seccion">
+                <div class="contenedor checkout-grid">
+                    <form id="formulario-checkout" class="formulario checkout-form" novalidate>
+                        <div class="checkout-seccion">
+                            <h2>1. Datos de contacto</h2>
+                            <div class="grid-formulario">
+                                <div class="campo campo-completo">
+                                    <label for="nombre">Nombre completo *</label>
+                                    <input id="nombre" required maxlength="150" />
+                                    <small id="nombre-error" class="error"></small>
+                                </div>
+                                <div class="campo campo-completo">
+                                    <label for="correo">Correo *</label>
+                                    <input id="correo" type="email" maxlength="100" />
+                                    <small id="correo-error" class="error"></small>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="checkout-seccion">
+                            <h2>2. Despacho</h2>
+                            <div class="grid-formulario">
+                                <div class="campo">
+                                    <label for="region">Región *</label>
+                                    <select id="region">
+                                        <option value="">Selecciona una región</option>
+                                    </select>
+                                    <small id="region-error" class="error"></small>
+                                </div>
+                                <div class="campo">
+                                    <label for="comuna">Comuna *</label>
+                                    <select id="comuna">
+                                        <option value="">Selecciona una comuna</option>
+                                    </select>
+                                    <small id="comuna-error" class="error"></small>
+                                </div>
+                                <div class="campo campo-completo">
+                                    <label for="direccion">Dirección *</label>
+                                    <textarea id="direccion" maxlength="300" rows="3"></textarea>
+                                    <small id="direccion-error" class="error"></small>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="checkout-seccion">
+                            <h2>3. Método de pago</h2>
+                            <div class="campo">
+                                <label for="metodo-pago">Selecciona una opción *</label>
+                                <select id="metodo-pago">
+                                    <option value="">Selecciona</option>
+                                    <option value="Tarjeta (simulado)">Tarjeta (simulado)</option>
+                                    <option value="Transferencia (simulado)">Transferencia (simulado)</option>
+                                </select>
+                                <small id="metodo-pago-error" class="error"></small>
+                                <p class="texto-ayuda">No se realiza ningún cobro real en esta versión académica.</p>
+                            </div>
+                            <label class="check-line">
+                                <input id="terminos" type="checkbox" />
+                                Acepto las condiciones de la compra simulada.
+                            </label>
+                            <small id="terminos-error" class="error"></small>
+                        </div>
+                        <p id="mensaje-checkout" class="mensaje-formulario"></p>
+                        <div class="acciones-checkout">
+                            <a href="carrito.html" class="boton boton-secundario">← Volver al carrito</a>
+                            <button type="submit" class="boton boton-principal">Confirmar compra</button>
+                        </div>
+                    </form>
+                    <aside id="checkout-resumen-box" class="checkout-resumen">
+                        <h2>Resumen</h2>
+                        <div id="resumen-checkout"></div>
+                        <div class="checkout-total">
+                            <span>Total</span>
+                            <strong id="total-checkout">$0</strong>
+                        </div>
+                    </aside>
+                    <section id="confirmacion-checkout" class="confirmacion-checkout oculto"></section>
+                </div>
+            </section>
+        </main>
+        <footer class="pie-pagina">
+            <div class="contenedor pie-contenido">
+                <div>
+                    <a href="index.html" class="logo logo-footer">
+                        NOVA
+                        <span>SNEAKERS</span>
+                    </a>
+                    <p>Tienda online de zapatillas urbanas y deportivas.</p>
+                </div>
+                <div class="pie-enlaces">
+                    <a href="nosotros.html">Nosotros</a>
+                    <a href="blog.html">Blog</a>
+                    <a href="contacto.html">Contacto</a>
+                </div>
+            </div>
+            <div class="contenedor copyright"><p>&copy; 2026 NOVA SNEAKERS. Proyecto académico DSY1104.</p></div>
+        </footer>
+        <script src="js/usuarios.js"></script>
+        <script src="js/productos.js"></script>
+        <script src="js/pedidos.js"></script>
+        <script src="js/validaciones.js"></script>
+        <script src="js/carrito.js"></script>
+        <script src="js/checkout.js"></script>
+        <script src="js/header.js"></script>
+        <script src="js/menu.js"></script>
+    </body>
+</html>

@@ -1,1 +1,125 @@
-<!DOCTYPE html><html lang="es"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>NOVA SNEAKERS | Mi cuenta</title><link rel="stylesheet" href="css/estilos.css"></head><body><a href="#main" class="skip-link">Saltar al contenido principal</a><header class="encabezado"><div class="contenedor barra-navegacion"><a href="index.html" class="logo">NOVA <span>SNEAKERS</span></a><button type="button" class="menu-toggle" id="menu-toggle" aria-label="Abrir menú" aria-expanded="false" aria-controls="menu-principal"><span></span><span></span><span></span></button><nav class="menu-principal" id="menu-principal" aria-label="Navegación principal"><a href="index.html">Inicio</a><a href="productos.html">Productos</a><a href="nosotros.html">Nosotros</a><a href="blog.html">Blog</a><a href="contacto.html">Contacto</a></nav><div class="acciones-navegacion"><a href="cuenta.html" class="enlace-login activo" data-cuenta-link>Mi cuenta</a><button type="button" class="boton-carrito" aria-label="Abrir resumen del carrito" aria-haspopup="dialog" aria-expanded="false"><span class="icono-carrito" aria-hidden="true">🛒</span> Carrito <span id="contador-carrito">0</span></button></div></div></header><main id="main"><section class="encabezado-pagina"><div class="contenedor"><p class="etiqueta">MI CUENTA</p><h1 id="nombre-cuenta">Mi cuenta</h1><p>Consulta tus datos, favoritos y pedidos.</p></div></section><section class="seccion"><div class="contenedor cuenta-grid"><article class="cuenta-card"><h2>Mis datos</h2><p><strong>Correo</strong><span id="correo-cuenta"></span></p><p><strong>Perfil</strong><span id="rol-cuenta"></span></p><p><strong>Dirección</strong><span id="direccion-cuenta"></span></p><div class="cuenta-acciones"><a href="favoritos.html" class="boton boton-secundario">Favoritos <span id="cantidad-favoritos-cuenta"></span></a><button type="button" id="boton-cerrar-sesion-cuenta" class="boton boton-principal">Cerrar sesión</button></div></article><article class="cuenta-card cuenta-pedidos"><div class="encabezado-seccion"><div><h2>Mis pedidos</h2><p>Historial de compras registradas.</p></div><a href="productos.html" class="boton boton-secundario">Seguir comprando</a></div><div id="pedidos-cuenta"></div></article></div></section></main><footer class="pie-pagina"><div class="contenedor pie-contenido"><div><a href="index.html" class="logo logo-footer">NOVA <span>SNEAKERS</span></a><p>Tienda online de zapatillas urbanas y deportivas.</p></div><div class="pie-enlaces"><a href="nosotros.html">Nosotros</a><a href="blog.html">Blog</a><a href="contacto.html">Contacto</a></div></div><div class="contenedor copyright"><p>&copy; 2026 NOVA SNEAKERS. Proyecto académico DSY1104.</p></div></footer><script src="js/usuarios.js"></script><script src="js/productos.js"></script><script src="js/pedidos.js"></script><script src="js/carrito.js"></script><script src="js/favoritos.js"></script><script src="js/cuenta.js"></script><script src="js/header.js"></script><script src="js/menu.js"></script></body></html>
+<!doctype html>
+<html lang="es">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>NOVA SNEAKERS | Mi cuenta</title>
+        <link rel="stylesheet" href="css/estilos.css" />
+    </head>
+    <body>
+        <a href="#main" class="skip-link">Saltar al contenido principal</a>
+        <header class="encabezado">
+            <div class="contenedor barra-navegacion">
+                <a href="index.html" class="logo">
+                    NOVA
+                    <span>SNEAKERS</span>
+                </a>
+                <button
+                    type="button"
+                    class="menu-toggle"
+                    id="menu-toggle"
+                    aria-label="Abrir menú"
+                    aria-expanded="false"
+                    aria-controls="menu-principal"
+                >
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+                <nav class="menu-principal" id="menu-principal" aria-label="Navegación principal">
+                    <a href="index.html">Inicio</a>
+                    <a href="productos.html">Productos</a>
+                    <a href="nosotros.html">Nosotros</a>
+                    <a href="blog.html">Blog</a>
+                    <a href="contacto.html">Contacto</a>
+                </nav>
+                <div class="acciones-navegacion">
+                    <a href="cuenta.html" class="enlace-login activo" data-cuenta-link>Mi cuenta</a>
+                    <button
+                        type="button"
+                        class="boton-carrito"
+                        aria-label="Abrir resumen del carrito"
+                        aria-haspopup="dialog"
+                        aria-expanded="false"
+                    >
+                        <span class="icono-carrito" aria-hidden="true">🛒</span>
+                        Carrito
+                        <span id="contador-carrito">0</span>
+                    </button>
+                </div>
+            </div>
+        </header>
+        <main id="main">
+            <section class="encabezado-pagina">
+                <div class="contenedor">
+                    <p class="etiqueta">MI CUENTA</p>
+                    <h1 id="nombre-cuenta">Mi cuenta</h1>
+                    <p>Consulta tus datos, favoritos y pedidos.</p>
+                </div>
+            </section>
+            <section class="seccion">
+                <div class="contenedor cuenta-grid">
+                    <article class="cuenta-card">
+                        <h2>Mis datos</h2>
+                        <p>
+                            <strong>Correo</strong>
+                            <span id="correo-cuenta"></span>
+                        </p>
+                        <p>
+                            <strong>Perfil</strong>
+                            <span id="rol-cuenta"></span>
+                        </p>
+                        <p>
+                            <strong>Dirección</strong>
+                            <span id="direccion-cuenta"></span>
+                        </p>
+                        <div class="cuenta-acciones">
+                            <a href="favoritos.html" class="boton boton-secundario">
+                                Favoritos
+                                <span id="cantidad-favoritos-cuenta"></span>
+                            </a>
+                            <button type="button" id="boton-cerrar-sesion-cuenta" class="boton boton-principal">
+                                Cerrar sesión
+                            </button>
+                        </div>
+                    </article>
+                    <article class="cuenta-card cuenta-pedidos">
+                        <div class="encabezado-seccion">
+                            <div>
+                                <h2>Mis pedidos</h2>
+                                <p>Historial de compras registradas.</p>
+                            </div>
+                            <a href="productos.html" class="boton boton-secundario">Seguir comprando</a>
+                        </div>
+                        <div id="pedidos-cuenta"></div>
+                    </article>
+                </div>
+            </section>
+        </main>
+        <footer class="pie-pagina">
+            <div class="contenedor pie-contenido">
+                <div>
+                    <a href="index.html" class="logo logo-footer">
+                        NOVA
+                        <span>SNEAKERS</span>
+                    </a>
+                    <p>Tienda online de zapatillas urbanas y deportivas.</p>
+                </div>
+                <div class="pie-enlaces">
+                    <a href="nosotros.html">Nosotros</a>
+                    <a href="blog.html">Blog</a>
+                    <a href="contacto.html">Contacto</a>
+                </div>
+            </div>
+            <div class="contenedor copyright"><p>&copy; 2026 NOVA SNEAKERS. Proyecto académico DSY1104.</p></div>
+        </footer>
+        <script src="js/usuarios.js"></script>
+        <script src="js/productos.js"></script>
+        <script src="js/pedidos.js"></script>
+        <script src="js/carrito.js"></script>
+        <script src="js/favoritos.js"></script>
+        <script src="js/cuenta.js"></script>
+        <script src="js/header.js"></script>
+        <script src="js/menu.js"></script>
+    </body>
+</html>

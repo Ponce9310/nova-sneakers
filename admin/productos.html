@@ -1,2 +1,206 @@
-<!DOCTYPE html>
-<html lang="es"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>NOVA SNEAKERS | Gestión de productos</title><link rel="stylesheet" href="../css/estilos.css"></head><body><a href="#main" class="skip-link">Saltar al contenido principal</a><header class="encabezado"><div class="contenedor barra-navegacion"><a href="index.html" class="logo">NOVA <span>SNEAKERS</span></a><button type="button" class="menu-toggle" id="menu-toggle" aria-label="Abrir menú" aria-expanded="false" aria-controls="menu-principal"><span></span><span></span><span></span></button><nav class="menu-principal menu-admin" id="menu-principal" aria-label="Navegación administrativa"><a href="index.html" data-modulo="inicio">Inicio</a><a href="productos.html" data-modulo="productos" data-menu-productos class="activo">Productos</a><a href="usuarios.html" data-modulo="usuarios" data-menu-usuarios>Usuarios</a><a href="pedidos.html" data-modulo="pedidos">Pedidos</a><a href="../productos.html" data-modulo="tienda" data-menu-tienda>Tienda</a></nav><div class="acciones-navegacion"><span class="usuario-sesion" id="nombre-sesion"></span><button type="button" class="boton boton-secundario boton-salir" onclick="salirDelSistema()">Cerrar sesión</button></div></div></header><main id="main"><section class="encabezado-pagina"><div class="contenedor"><p class="etiqueta">ADMINISTRACIÓN</p><h1>Productos</h1><p id="descripcion-productos-admin">Consulta el catálogo. El administrador puede crear, editar y eliminar productos.</p></div></section><section class="seccion"><div class="contenedor"><div id="bloque-formulario-producto" class="panel-admin-form"><div class="encabezado-seccion"><h2 id="titulo-formulario-producto">Nuevo producto</h2><p>Completa los datos según las reglas definidas para productos.</p></div><form id="formulario-producto" class="formulario" novalidate><div class="grid-formulario"><div class="campo"><label for="codigo">Código *</label><input id="codigo" minlength="3" required placeholder="NS-009"><small id="codigo-error" class="error"></small><small class="texto-ayuda">Mínimo 3 caracteres.</small></div><div class="campo"><label for="nombre-producto">Nombre *</label><input id="nombre-producto" maxlength="100" required placeholder="Nombre del producto"><small id="nombre-producto-error" class="error"></small></div><div class="campo campo-completo"><label for="descripcion-producto">Descripción</label><textarea id="descripcion-producto" maxlength="500" rows="3" placeholder="Descripción del producto (opcional)"></textarea><small id="descripcion-producto-error" class="error"></small></div><div class="campo"><label for="precio">Precio *</label><input id="precio" type="number" min="0" step="0.01" required placeholder="59990"><small id="precio-error" class="error"></small><small class="texto-ayuda">0 significa GRATIS.</small></div><div class="campo"><label for="stock">Stock *</label><input id="stock" type="number" min="0" step="1" required placeholder="10"><small id="stock-error" class="error"></small></div><div class="campo"><label for="stockCritico">Stock crítico</label><input id="stockCritico" type="number" min="0" step="1" placeholder="3"><small id="stockCritico-error" class="error"></small><small class="texto-ayuda">Alerta cuando stock ≤ este valor.</small></div><div class="campo"><label for="categoria">Categoría *</label><select id="categoria" required><option value="">Selecciona una categoría</option></select><small id="categoria-error" class="error"></small></div><div class="campo"><label for="publico">Colección *</label><select id="publico" required><option value="">Selecciona una colección</option><option value="Unisex">Unisex</option><option value="Mujer">Mujer</option><option value="Niños">Niños</option></select><small id="publico-error" class="error"></small></div><div class="campo campo-completo"><label for="imagen">Imagen principal</label><input id="imagen" maxlength="500" placeholder="img/productos/mi-producto.jpg o URL"><small id="imagen-error" class="error"></small><small class="texto-ayuda">Opcional. Si queda vacío se mostrará una imagen genérica. La galería de detalle usa hasta 3 vistas del producto.</small></div></div><div class="acciones-formulario-admin"><button id="boton-guardar-producto" type="submit" class="boton boton-principal">Crear producto</button><button id="boton-cancelar-producto" type="button" class="boton boton-secundario oculto">Cancelar edición</button></div><p id="mensaje-producto" class="mensaje-formulario"></p></form></div><div class="herramientas-admin"><div><label for="buscar-producto-admin">Buscar</label><input id="buscar-producto-admin" type="search" placeholder="Código o nombre"></div><div><label for="filtro-categoria-admin">Categoría</label><select id="filtro-categoria-admin"><option value="Todos">Todas</option></select></div><strong id="contador-productos-admin">0 producto(s)</strong></div><div class="lista-admin" id="tabla-productos-admin"></div></div></section></main><footer class="pie-pagina"><div class="contenedor pie-contenido"><div><a href="../index.html" class="logo logo-footer">NOVA <span>SNEAKERS</span></a><p>Tienda online de zapatillas urbanas y deportivas.</p></div><div class="pie-enlaces"><a href="../nosotros.html" data-enlace-publico>Nosotros</a><a href="../blog.html" data-enlace-publico>Blog</a><a href="../contacto.html" data-enlace-publico>Contacto</a></div></div><div class="contenedor copyright"><p>&copy; 2026 NOVA SNEAKERS. Proyecto académico DSY1104.</p></div></footer><script src="../js/usuarios.js"></script><script src="../js/productos.js"></script><script src="../js/admin.js"></script><script src="../js/validaciones.js"></script><script src="../js/admin-productos.js"></script><script>document.addEventListener("DOMContentLoaded",function(){const sesion=protegerPaginaAdministrativa(["Administrador","Vendedor"]);if(!sesion)return;mostrarDatosSesion(sesion);if(sesion.tipo!=="Administrador"){document.getElementById("bloque-formulario-producto").classList.add("oculto");document.getElementById("descripcion-productos-admin").textContent="Consulta el catálogo y revisa el detalle de cada producto según los permisos de tu perfil.";}iniciarGestionProductos(sesion);});</script><script src="../js/menu.js"></script></body></html>
+<!doctype html>
+<html lang="es">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>NOVA SNEAKERS | Gestión de productos</title>
+        <link rel="stylesheet" href="../css/estilos.css" />
+    </head>
+    <body>
+        <a href="#main" class="skip-link">Saltar al contenido principal</a>
+        <header class="encabezado">
+            <div class="contenedor barra-navegacion">
+                <a href="index.html" class="logo">
+                    NOVA
+                    <span>SNEAKERS</span>
+                </a>
+                <button
+                    type="button"
+                    class="menu-toggle"
+                    id="menu-toggle"
+                    aria-label="Abrir menú"
+                    aria-expanded="false"
+                    aria-controls="menu-principal"
+                >
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+                <nav class="menu-principal menu-admin" id="menu-principal" aria-label="Navegación administrativa">
+                    <a href="index.html" data-modulo="inicio">Inicio</a>
+                    <a href="productos.html" data-modulo="productos" data-menu-productos class="activo">Productos</a>
+                    <a href="usuarios.html" data-modulo="usuarios" data-menu-usuarios>Usuarios</a>
+                    <a href="pedidos.html" data-modulo="pedidos">Pedidos</a>
+                    <a href="../productos.html" data-modulo="tienda" data-menu-tienda>Tienda</a>
+                </nav>
+                <div class="acciones-navegacion">
+                    <span class="usuario-sesion" id="nombre-sesion"></span>
+                    <button type="button" class="boton boton-secundario boton-salir" onclick="salirDelSistema()">
+                        Cerrar sesión
+                    </button>
+                </div>
+            </div>
+        </header>
+        <main id="main">
+            <section class="encabezado-pagina">
+                <div class="contenedor">
+                    <p class="etiqueta">ADMINISTRACIÓN</p>
+                    <h1>Productos</h1>
+                    <p id="descripcion-productos-admin">
+                        Consulta el catálogo. El administrador puede crear, editar y eliminar productos.
+                    </p>
+                </div>
+            </section>
+            <section class="seccion">
+                <div class="contenedor">
+                    <div id="bloque-formulario-producto" class="panel-admin-form">
+                        <div class="encabezado-seccion">
+                            <h2 id="titulo-formulario-producto">Nuevo producto</h2>
+                            <p>Completa los datos según las reglas definidas para productos.</p>
+                        </div>
+                        <form id="formulario-producto" class="formulario" novalidate>
+                            <div class="grid-formulario">
+                                <div class="campo">
+                                    <label for="codigo">Código *</label>
+                                    <input id="codigo" minlength="3" required placeholder="NS-009" />
+                                    <small id="codigo-error" class="error"></small>
+                                    <small class="texto-ayuda">Mínimo 3 caracteres.</small>
+                                </div>
+                                <div class="campo">
+                                    <label for="nombre-producto">Nombre *</label>
+                                    <input
+                                        id="nombre-producto"
+                                        maxlength="100"
+                                        required
+                                        placeholder="Nombre del producto"
+                                    />
+                                    <small id="nombre-producto-error" class="error"></small>
+                                </div>
+                                <div class="campo campo-completo">
+                                    <label for="descripcion-producto">Descripción</label>
+                                    <textarea
+                                        id="descripcion-producto"
+                                        maxlength="500"
+                                        rows="3"
+                                        placeholder="Descripción del producto (opcional)"
+                                    ></textarea>
+                                    <small id="descripcion-producto-error" class="error"></small>
+                                </div>
+                                <div class="campo">
+                                    <label for="precio">Precio *</label>
+                                    <input id="precio" type="number" min="0" step="0.01" required placeholder="59990" />
+                                    <small id="precio-error" class="error"></small>
+                                    <small class="texto-ayuda">0 significa GRATIS.</small>
+                                </div>
+                                <div class="campo">
+                                    <label for="stock">Stock *</label>
+                                    <input id="stock" type="number" min="0" step="1" required placeholder="10" />
+                                    <small id="stock-error" class="error"></small>
+                                </div>
+                                <div class="campo">
+                                    <label for="stockCritico">Stock crítico</label>
+                                    <input id="stockCritico" type="number" min="0" step="1" placeholder="3" />
+                                    <small id="stockCritico-error" class="error"></small>
+                                    <small class="texto-ayuda">Alerta cuando stock ≤ este valor.</small>
+                                </div>
+                                <div class="campo">
+                                    <label for="categoria">Categoría *</label>
+                                    <select id="categoria" required>
+                                        <option value="">Selecciona una categoría</option>
+                                    </select>
+                                    <small id="categoria-error" class="error"></small>
+                                </div>
+                                <div class="campo">
+                                    <label for="publico">Colección *</label>
+                                    <select id="publico" required>
+                                        <option value="">Selecciona una colección</option>
+                                        <option value="Unisex">Unisex</option>
+                                        <option value="Mujer">Mujer</option>
+                                        <option value="Niños">Niños</option>
+                                    </select>
+                                    <small id="publico-error" class="error"></small>
+                                </div>
+                                <div class="campo campo-completo">
+                                    <label for="imagen">Imagen principal</label>
+                                    <input
+                                        id="imagen"
+                                        maxlength="500"
+                                        placeholder="img/productos/mi-producto.jpg o URL"
+                                    />
+                                    <small id="imagen-error" class="error"></small>
+                                    <small class="texto-ayuda">
+                                        Opcional. Si queda vacío se mostrará una imagen genérica. La galería de detalle
+                                        usa hasta 3 vistas del producto.
+                                    </small>
+                                </div>
+                            </div>
+                            <div class="acciones-formulario-admin">
+                                <button id="boton-guardar-producto" type="submit" class="boton boton-principal">
+                                    Crear producto
+                                </button>
+                                <button
+                                    id="boton-cancelar-producto"
+                                    type="button"
+                                    class="boton boton-secundario oculto"
+                                >
+                                    Cancelar edición
+                                </button>
+                            </div>
+                            <p id="mensaje-producto" class="mensaje-formulario"></p>
+                        </form>
+                    </div>
+                    <div class="herramientas-admin">
+                        <div>
+                            <label for="buscar-producto-admin">Buscar</label>
+                            <input id="buscar-producto-admin" type="search" placeholder="Código o nombre" />
+                        </div>
+                        <div>
+                            <label for="filtro-categoria-admin">Categoría</label>
+                            <select id="filtro-categoria-admin">
+                                <option value="Todos">Todas</option>
+                            </select>
+                        </div>
+                        <strong id="contador-productos-admin">0 producto(s)</strong>
+                    </div>
+                    <div class="lista-admin" id="tabla-productos-admin"></div>
+                </div>
+            </section>
+        </main>
+        <footer class="pie-pagina">
+            <div class="contenedor pie-contenido">
+                <div>
+                    <a href="../index.html" class="logo logo-footer">
+                        NOVA
+                        <span>SNEAKERS</span>
+                    </a>
+                    <p>Tienda online de zapatillas urbanas y deportivas.</p>
+                </div>
+                <div class="pie-enlaces">
+                    <a href="../nosotros.html" data-enlace-publico>Nosotros</a>
+                    <a href="../blog.html" data-enlace-publico>Blog</a>
+                    <a href="../contacto.html" data-enlace-publico>Contacto</a>
+                </div>
+            </div>
+            <div class="contenedor copyright"><p>&copy; 2026 NOVA SNEAKERS. Proyecto académico DSY1104.</p></div>
+        </footer>
+        <script src="../js/usuarios.js"></script>
+        <script src="../js/productos.js"></script>
+        <script src="../js/admin.js"></script>
+        <script src="../js/validaciones.js"></script>
+        <script src="../js/admin-productos.js"></script>
+        <script>
+            document.addEventListener("DOMContentLoaded", function () {
+                const sesion = protegerPaginaAdministrativa(["Administrador", "Vendedor"]);
+                if (!sesion) return;
+                mostrarDatosSesion(sesion);
+                if (sesion.tipo !== "Administrador") {
+                    document.getElementById("bloque-formulario-producto").classList.add("oculto");
+                    document.getElementById("descripcion-productos-admin").textContent =
+                        "Consulta el catálogo y revisa el detalle de cada producto según los permisos de tu perfil.";
+                }
+                iniciarGestionProductos(sesion);
+            });
+        </script>
+        <script src="../js/menu.js"></script>
+    </body>
+</html>

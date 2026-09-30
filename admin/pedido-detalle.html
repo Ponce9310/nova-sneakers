@@ -1,2 +1,141 @@
-<!DOCTYPE html>
-<html lang="es"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>NOVA SNEAKERS | Detalle de pedido</title><link rel="stylesheet" href="../css/estilos.css"></head><body><a href="#main" class="skip-link">Saltar al contenido principal</a><header class="encabezado"><div class="contenedor barra-navegacion"><a href="index.html" class="logo">NOVA <span>SNEAKERS</span></a><button type="button" class="menu-toggle" id="menu-toggle" aria-label="Abrir menú" aria-expanded="false" aria-controls="menu-principal"><span></span><span></span><span></span></button><nav class="menu-principal menu-admin" id="menu-principal" aria-label="Navegación administrativa"><a href="index.html" data-modulo="inicio">Inicio</a><a href="productos.html" data-modulo="productos" data-menu-productos>Productos</a><a href="usuarios.html" data-modulo="usuarios" data-menu-usuarios>Usuarios</a><a href="pedidos.html" data-modulo="pedidos" class="activo">Pedidos</a><a href="../productos.html" data-modulo="tienda" data-menu-tienda>Tienda</a></nav><div class="acciones-navegacion"><span class="usuario-sesion" id="nombre-sesion"></span><button type="button" class="boton boton-secundario boton-salir" onclick="salirDelSistema()">Cerrar sesión</button></div></div></header><main id="main"><section class="encabezado-pagina"><div class="contenedor"><p class="etiqueta">CONSULTA</p><h1 id="numero-pedido">Detalle de pedido</h1><p id="resumen-pedido">Cargando...</p></div></section><section class="seccion"><div class="contenedor"><div id="detalle-pedido-admin" class="detalle-admin"></div><a href="pedidos.html" class="boton boton-secundario">← Volver a pedidos</a></div></section></main><footer class="pie-pagina"><div class="contenedor pie-contenido"><div><a href="../index.html" class="logo logo-footer">NOVA <span>SNEAKERS</span></a><p>Tienda online de zapatillas urbanas y deportivas.</p></div><div class="pie-enlaces"><a href="../nosotros.html" data-enlace-publico>Nosotros</a><a href="../blog.html" data-enlace-publico>Blog</a><a href="../contacto.html" data-enlace-publico>Contacto</a></div></div><div class="contenedor copyright"><p>&copy; 2026 NOVA SNEAKERS. Proyecto académico DSY1104.</p></div></footer><script src="../js/usuarios.js"></script><script src="../js/productos.js"></script><script src="../js/pedidos.js"></script><script src="../js/admin.js"></script><script>document.addEventListener("DOMContentLoaded",function(){const sesion=protegerPaginaAdministrativa(["Administrador","Vendedor"]);if(!sesion)return;mostrarDatosSesion(sesion);configurarMenuAdmin(sesion,"pedidos");const numero=new URLSearchParams(window.location.search).get("numero");const pedido=buscarPedido(numero);const contenedor=document.getElementById("detalle-pedido-admin");if(!pedido){document.getElementById("numero-pedido").textContent="Pedido no encontrado";contenedor.innerHTML='<div class="estado-vacio"><h3>No se encontró el pedido</h3><p>El pedido solicitado no existe en los datos de demostración.</p></div>';return;}document.getElementById("numero-pedido").textContent="Pedido "+pedido.numero;document.getElementById("resumen-pedido").textContent=pedido.fecha+" · "+pedido.cliente;contenedor.innerHTML='<div class="resumen-pedido-admin"><div><span>Cliente</span><strong>'+escaparHTML(pedido.cliente)+'</strong></div><div><span>Fecha</span><strong>'+escaparHTML(pedido.fecha)+'</strong></div><div><span>Estado</span><strong>'+escaparHTML(pedido.estado)+'</strong></div><div><span>Total</span><strong>'+formatearPrecio(pedido.total)+'</strong></div></div><div class="control-estado-pedido"><label for="estado-pedido-admin">Estado del pedido</label><select id="estado-pedido-admin"><option>Pendiente</option><option>Preparando</option><option>Enviado</option><option>Entregado</option><option>Cancelado</option></select><button type="button" id="guardar-estado-pedido" class="boton boton-principal">Actualizar estado</button><p id="mensaje-estado-pedido" class="mensaje-formulario"></p></div><h2>Productos del pedido</h2><div class="lista-detalle-pedido">'+pedido.productos.map(function(item){return '<div class="item-detalle-pedido"><div><strong>'+escaparHTML(item.nombre)+'</strong><span>'+escaparHTML(item.codigo)+'</span></div><span>Cantidad: '+item.cantidad+'</span><strong>'+formatearPrecio(item.precio*item.cantidad)+'</strong></div>';}).join("")+'</div>';const selector=document.getElementById('estado-pedido-admin');selector.value=pedido.estado;const botonEstado=document.getElementById('guardar-estado-pedido');if(sesion.tipo!=='Administrador'){botonEstado.classList.add('oculto');selector.disabled=true;}else{botonEstado.addEventListener('click',function(){const resultado=actualizarEstadoPedido(pedido.numero,selector.value);document.getElementById('mensaje-estado-pedido').textContent=resultado.mensaje;document.getElementById('resumen-pedido').textContent=pedido.fecha+' · '+pedido.cliente+' · '+selector.value;});}});</script><script src="../js/menu.js"></script></body></html>
+<!doctype html>
+<html lang="es">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>NOVA SNEAKERS | Detalle de pedido</title>
+        <link rel="stylesheet" href="../css/estilos.css" />
+    </head>
+    <body>
+        <a href="#main" class="skip-link">Saltar al contenido principal</a>
+        <header class="encabezado">
+            <div class="contenedor barra-navegacion">
+                <a href="index.html" class="logo">
+                    NOVA
+                    <span>SNEAKERS</span>
+                </a>
+                <button
+                    type="button"
+                    class="menu-toggle"
+                    id="menu-toggle"
+                    aria-label="Abrir menú"
+                    aria-expanded="false"
+                    aria-controls="menu-principal"
+                >
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+                <nav class="menu-principal menu-admin" id="menu-principal" aria-label="Navegación administrativa">
+                    <a href="index.html" data-modulo="inicio">Inicio</a>
+                    <a href="productos.html" data-modulo="productos" data-menu-productos>Productos</a>
+                    <a href="usuarios.html" data-modulo="usuarios" data-menu-usuarios>Usuarios</a>
+                    <a href="pedidos.html" data-modulo="pedidos" class="activo">Pedidos</a>
+                    <a href="../productos.html" data-modulo="tienda" data-menu-tienda>Tienda</a>
+                </nav>
+                <div class="acciones-navegacion">
+                    <span class="usuario-sesion" id="nombre-sesion"></span>
+                    <button type="button" class="boton boton-secundario boton-salir" onclick="salirDelSistema()">
+                        Cerrar sesión
+                    </button>
+                </div>
+            </div>
+        </header>
+        <main id="main">
+            <section class="encabezado-pagina">
+                <div class="contenedor">
+                    <p class="etiqueta">CONSULTA</p>
+                    <h1 id="numero-pedido">Detalle de pedido</h1>
+                    <p id="resumen-pedido">Cargando...</p>
+                </div>
+            </section>
+            <section class="seccion">
+                <div class="contenedor">
+                    <div id="detalle-pedido-admin" class="detalle-admin"></div>
+                    <a href="pedidos.html" class="boton boton-secundario">← Volver a pedidos</a>
+                </div>
+            </section>
+        </main>
+        <footer class="pie-pagina">
+            <div class="contenedor pie-contenido">
+                <div>
+                    <a href="../index.html" class="logo logo-footer">
+                        NOVA
+                        <span>SNEAKERS</span>
+                    </a>
+                    <p>Tienda online de zapatillas urbanas y deportivas.</p>
+                </div>
+                <div class="pie-enlaces">
+                    <a href="../nosotros.html" data-enlace-publico>Nosotros</a>
+                    <a href="../blog.html" data-enlace-publico>Blog</a>
+                    <a href="../contacto.html" data-enlace-publico>Contacto</a>
+                </div>
+            </div>
+            <div class="contenedor copyright"><p>&copy; 2026 NOVA SNEAKERS. Proyecto académico DSY1104.</p></div>
+        </footer>
+        <script src="../js/usuarios.js"></script>
+        <script src="../js/productos.js"></script>
+        <script src="../js/pedidos.js"></script>
+        <script src="../js/admin.js"></script>
+        <script>
+            document.addEventListener("DOMContentLoaded", function () {
+                const sesion = protegerPaginaAdministrativa(["Administrador", "Vendedor"]);
+                if (!sesion) return;
+                mostrarDatosSesion(sesion);
+                configurarMenuAdmin(sesion, "pedidos");
+                const numero = new URLSearchParams(window.location.search).get("numero");
+                const pedido = buscarPedido(numero);
+                const contenedor = document.getElementById("detalle-pedido-admin");
+                if (!pedido) {
+                    document.getElementById("numero-pedido").textContent = "Pedido no encontrado";
+                    contenedor.innerHTML =
+                        '<div class="estado-vacio"><h3>No se encontró el pedido</h3><p>El pedido solicitado no existe en los datos de demostración.</p></div>';
+                    return;
+                }
+                document.getElementById("numero-pedido").textContent = "Pedido " + pedido.numero;
+                document.getElementById("resumen-pedido").textContent = pedido.fecha + " · " + pedido.cliente;
+                contenedor.innerHTML =
+                    '<div class="resumen-pedido-admin"><div><span>Cliente</span><strong>' +
+                    escaparHTML(pedido.cliente) +
+                    "</strong></div><div><span>Fecha</span><strong>" +
+                    escaparHTML(pedido.fecha) +
+                    "</strong></div><div><span>Estado</span><strong>" +
+                    escaparHTML(pedido.estado) +
+                    "</strong></div><div><span>Total</span><strong>" +
+                    formatearPrecio(pedido.total) +
+                    '</strong></div></div><div class="control-estado-pedido"><label for="estado-pedido-admin">Estado del pedido</label><select id="estado-pedido-admin"><option>Pendiente</option><option>Preparando</option><option>Enviado</option><option>Entregado</option><option>Cancelado</option></select><button type="button" id="guardar-estado-pedido" class="boton boton-principal">Actualizar estado</button><p id="mensaje-estado-pedido" class="mensaje-formulario"></p></div><h2>Productos del pedido</h2><div class="lista-detalle-pedido">' +
+                    pedido.productos
+                        .map(function (item) {
+                            return (
+                                '<div class="item-detalle-pedido"><div><strong>' +
+                                escaparHTML(item.nombre) +
+                                "</strong><span>" +
+                                escaparHTML(item.codigo) +
+                                "</span></div><span>Cantidad: " +
+                                item.cantidad +
+                                "</span><strong>" +
+                                formatearPrecio(item.precio * item.cantidad) +
+                                "</strong></div>"
+                            );
+                        })
+                        .join("") +
+                    "</div>";
+                const selector = document.getElementById("estado-pedido-admin");
+                selector.value = pedido.estado;
+                const botonEstado = document.getElementById("guardar-estado-pedido");
+                if (sesion.tipo !== "Administrador") {
+                    botonEstado.classList.add("oculto");
+                    selector.disabled = true;
+                } else {
+                    botonEstado.addEventListener("click", function () {
+                        const resultado = actualizarEstadoPedido(pedido.numero, selector.value);
+                        document.getElementById("mensaje-estado-pedido").textContent = resultado.mensaje;
+                        document.getElementById("resumen-pedido").textContent =
+                            pedido.fecha + " · " + pedido.cliente + " · " + selector.value;
+                    });
+                }
+            });
+        </script>
+        <script src="../js/menu.js"></script>
+    </body>
+</html>
