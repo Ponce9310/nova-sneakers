@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NOVA SNEAKERS | Iniciar sesión</title>
+<link rel="stylesheet" href="css/estilos.css">
+</head>
+<body class="pagina-login"><a href="#main" class="skip-link">Saltar al contenido principal</a>
+<header class="encabezado"><div class="contenedor barra-navegacion">
+<a href="index.html" class="logo">NOVA <span>SNEAKERS</span></a>
+<button type="button" class="menu-toggle" id="menu-toggle" aria-label="Abrir menú" aria-expanded="false" aria-controls="menu-principal"><span></span><span></span><span></span></button><nav class="menu-principal" id="menu-principal" aria-label="Navegación principal"><a href="index.html">Inicio</a><a href="productos.html">Productos</a><a href="nosotros.html">Nosotros</a><a href="blog.html">Blog</a><a href="contacto.html">Contacto</a></nav>
+<div class="acciones-navegacion"><a href="login.html" class="enlace-login activo" data-cuenta-link>Iniciar sesión</a><button type="button" class="boton-carrito" aria-label="Abrir resumen del carrito" aria-haspopup="dialog" aria-expanded="false"><span class="icono-carrito" aria-hidden="true">🛒</span> Carrito <span id="contador-carrito">0</span></button></div>
+</div></header>
+<main id="main"><section class="encabezado-pagina login-encabezado"><div class="contenedor"><p class="etiqueta">NOVA SNEAKERS</p><h1>Iniciar sesión</h1><p>Ingresa con tu correo y contraseña.</p></div></section>
+<section class="seccion login-seccion"><div class="contenedor login-layout"><div class="login-card"><form id="formulario-login" class="formulario" novalidate>
+<div class="marca-login"><div class="logo-grande">NOVA <span>SNEAKERS</span></div><p>Acceso a la tienda</p></div>
+<div class="campo"><label for="correo">Correo *</label><input id="correo" name="correo" type="email" autocomplete="email" maxlength="100" placeholder="nombre@gmail.com" data-tipo="correo"><small id="correo-error" class="error"></small></div>
+<div class="campo">
+<label for="contrasena">Contraseña *</label>
+<div class="campo-password">
+<input id="contrasena" name="contrasena" type="password" autocomplete="current-password" minlength="4" maxlength="10" data-tipo="contraseña" required>
+<button type="button" class="boton-ojo" onclick="alternarPassword('contrasena', this)" aria-label="Mostrar contraseña">👁</button>
+</div>
+<small id="contrasena-error" class="error"></small>
+</div>
+<button type="submit" class="boton boton-principal">Iniciar sesión</button>
+<p id="mensaje-login" class="mensaje-formulario"></p>
+<p class="registro-invitacion">¿Eres nuevo? <a href="registro.html">Regístrate aquí</a></p>
+<p class="texto-ayuda">Demo: admin@gmail.com, vendedor@gmail.com o cliente@gmail.com. Contraseña: 1234.</p>
+</form></div><aside class="login-promocion" aria-label="Productos destacados"><span class="login-promocion-etiqueta">NUEVA COLECCIÓN</span><h2>Tu próximo par está aquí.</h2><p>Explora nuestras zapatillas urbanas y deportivas.</p><a class="login-promocion-imagen" href="productos.html" aria-label="Ver productos"><img src="img/productos/nova-motion-orange-v2.jpg" alt="Zapatilla Nova Motion naranja"></a><div class="login-promocion-pie"><strong>Nova Motion</strong><span>$74.990</span></div><a class="login-promocion-link" href="productos.html">Ver colección →</a></aside></div></section></main>
+<footer class="pie-pagina"><div class="contenedor pie-contenido"><div><a href="index.html" class="logo logo-footer">NOVA <span>SNEAKERS</span></a><p>Tienda online de zapatillas urbanas y deportivas.</p></div><div class="pie-enlaces"><a href="nosotros.html">Nosotros</a><a href="blog.html">Blog</a><a href="contacto.html">Contacto</a><a href="favoritos.html">Favoritos</a></div></div><div class="contenedor copyright"><p>&copy; 2026 NOVA SNEAKERS. Proyecto académico DSY1104.</p></div></footer>
+<script src="js/validaciones.js"></script><script src="js/usuarios.js"></script><script src="js/carrito.js"></script>
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+    const formulario = document.getElementById("formulario-login");
+    prepararValidacionesFormulario(formulario);
+
+    formulario.addEventListener("submit", function(evento) {
+        evento.preventDefault();
+        const correo = document.getElementById("correo");
+        const contraseña = document.getElementById("contrasena");
+        const correoCorrecto = validarCorreoEnTiempoReal(correo);
+        const contraseñaCorrecta = validarContraseñaEnTiempoReal(contraseña);
+        const mensaje = document.getElementById("mensaje-login");
+
+        if (!correoCorrecto || !contraseñaCorrecta) {
+            mensaje.textContent = "Revisa los datos ingresados.";
+            return;
+        }
+
+        const resultado = iniciarSesion(correo.value.trim(), contraseña.value);
+
+        if (!resultado.exito) {
+            mensaje.textContent = resultado.mensaje;
+            return;
+        }
+
+        mensaje.textContent = "Sesión iniciada como " + resultado.usuario.tipo + ".";
+
+        const retorno = new URLSearchParams(window.location.search).get("retorno");
+
+        if (resultado.usuario.tipo === "Cliente" && retorno === "checkout") {
+            window.location.href = "checkout.html";
+            return;
+        }
+
+        if (resultado.usuario.tipo === "Administrador" || resultado.usuario.tipo === "Vendedor") {
+            window.location.href = "admin/index.html";
+        } else {
+            window.location.href = "cuenta.html";
+        }
+    });
+});
+</script>
+<script src="js/header.js"></script><script src="js/favoritos.js"></script><script src="js/menu.js"></script></body>
+</html>

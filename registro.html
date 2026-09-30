@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NOVA SNEAKERS | Registro</title>
+<link rel="stylesheet" href="css/estilos.css">
+</head>
+<body><a href="#main" class="skip-link">Saltar al contenido principal</a>
+<header class="encabezado"><div class="contenedor barra-navegacion">
+<a href="index.html" class="logo">NOVA <span>SNEAKERS</span></a>
+<button type="button" class="menu-toggle" id="menu-toggle" aria-label="Abrir menú" aria-expanded="false" aria-controls="menu-principal"><span></span><span></span><span></span></button><nav class="menu-principal" id="menu-principal" aria-label="Navegación principal">
+<a href="index.html">Inicio</a><a href="productos.html">Productos</a><a href="nosotros.html">Nosotros</a><a href="blog.html">Blog</a><a href="contacto.html">Contacto</a>
+</nav><div class="acciones-navegacion"><a href="login.html" class="enlace-login" data-cuenta-link>Iniciar sesión</a><button type="button" class="boton-carrito" aria-label="Abrir resumen del carrito" aria-haspopup="dialog" aria-expanded="false"><span class="icono-carrito" aria-hidden="true">🛒</span> Carrito <span id="contador-carrito">0</span></button></div>
+</div></header>
+<main id="main"><section class="encabezado-pagina"><div class="contenedor"><p class="etiqueta">NOVA SNEAKERS</p><h1>Crear cuenta</h1><p>Completa tus datos para registrarte en la tienda.</p></div></section>
+<section class="seccion"><div class="contenedor contenedor-formulario"><form id="formulario-registro" class="formulario" novalidate>
+<div class="grid-formulario">
+<div class="campo"><label for="run">RUN *</label><input id="run" name="run" type="text" autocomplete="off" maxlength="9" placeholder="123456785" data-tipo="run"><small id="run-error" class="error"></small></div>
+<div class="campo"><label for="nombre">Nombre *</label><input id="nombre" name="nombre" type="text" autocomplete="given-name" maxlength="50" data-tipo="texto" data-maximo="50"><small id="nombre-error" class="error"></small></div>
+<div class="campo"><label for="apellidos">Apellidos *</label><input id="apellidos" name="apellidos" type="text" autocomplete="family-name" maxlength="100" data-tipo="texto" data-maximo="100"><small id="apellidos-error" class="error"></small></div>
+<div class="campo"><label for="correo">Correo *</label><input id="correo" name="correo" type="email" autocomplete="email" maxlength="100" placeholder="nombre@gmail.com" data-tipo="correo"><small id="correo-error" class="error"></small></div>
+<div class="campo">
+<label for="contrasena">Contraseña *</label>
+<div class="campo-password">
+<input id="contrasena" name="contrasena" type="password" autocomplete="new-password" minlength="4" maxlength="10" data-tipo="contraseña" required>
+<button type="button" class="boton-ojo" onclick="alternarPassword('contrasena', this)" aria-label="Mostrar contraseña">👁</button>
+</div>
+<p class="ayuda-password">Debe tener entre 4 y 10 caracteres.</p>
+<small id="contrasena-error" class="error"></small>
+<ul id="requisitos-password" class="requisitos-password">
+<li id="requisito-longitud">Entre 4 y 10 caracteres</li>
+</ul>
+</div>
+
+<div class="campo">
+<label for="confirmarContrasena">Confirmar contraseña *</label>
+<div class="campo-password">
+<input id="confirmarContrasena" name="confirmarContrasena" type="password" autocomplete="new-password" minlength="4" maxlength="10" required>
+<button type="button" class="boton-ojo" onclick="alternarPassword('confirmarContrasena', this)" aria-label="Mostrar confirmación de contraseña">👁</button>
+</div>
+<small id="confirmarContrasena-error" class="error"></small>
+</div>
+<div class="campo"><label for="fechaNacimiento">Fecha de nacimiento</label><input id="fechaNacimiento" name="fechaNacimiento" type="date" autocomplete="bday"><small id="fechaNacimiento-error" class="error"></small></div>
+<div class="campo"><label for="region">Región *</label><select id="region" name="region"><option value="">Selecciona una región</option></select><small id="region-error" class="error"></small></div>
+<div class="campo"><label for="comuna">Comuna *</label><select id="comuna" name="comuna"></select><small id="comuna-error" class="error"></small></div>
+<div class="campo campo-completo"><label for="direccion">Dirección *</label><textarea id="direccion" name="direccion" autocomplete="street-address" maxlength="300" rows="3" placeholder="Ingresa tu dirección"></textarea><small id="direccion-error" class="error"></small></div>
+</div>
+<p class="texto-ayuda">* Campos obligatorios.</p>
+<button type="submit" class="boton boton-principal">Crear cuenta</button>
+<p id="mensaje-registro" class="mensaje-formulario"></p>
+</form></div></section></main>
+<footer class="pie-pagina"><div class="contenedor pie-contenido"><div><a href="index.html" class="logo logo-footer">NOVA <span>SNEAKERS</span></a><p>Tienda online de zapatillas urbanas y deportivas.</p></div><div class="pie-enlaces"><a href="nosotros.html">Nosotros</a><a href="blog.html">Blog</a><a href="contacto.html">Contacto</a><a href="favoritos.html">Favoritos</a></div></div><div class="contenedor copyright"><p>&copy; 2026 NOVA SNEAKERS. Proyecto académico DSY1104.</p></div></footer>
+<script src="js/validaciones.js"></script><script src="js/usuarios.js"></script><script src="js/carrito.js"></script>
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+    const formulario = document.getElementById("formulario-registro");
+    prepararValidacionesFormulario(formulario);
+    cargarRegiones();
+
+    document.getElementById("region").addEventListener("change", function() {
+        actualizarComunas();
+    });
+
+    formulario.addEventListener("submit", function(evento) {
+        evento.preventDefault();
+        let valido = true;
+
+        valido = validarRunEnTiempoReal(document.getElementById("run")) && valido;
+        valido = validarTextoRequerido(document.getElementById("nombre"), 50) && valido;
+        valido = validarTextoRequerido(document.getElementById("apellidos"), 100) && valido;
+        valido = validarCorreoEnTiempoReal(document.getElementById("correo")) && valido;
+        valido = validarContraseñaEnTiempoReal(document.getElementById("contrasena")) && valido;
+        valido = validarConfirmacionContraseña() && valido;
+        valido = validarFechaNacimiento(document.getElementById("fechaNacimiento")) && valido;
+        valido = validarTextoRequerido(document.getElementById("direccion"), 300) && valido;
+
+        const region = document.getElementById("region");
+        const comuna = document.getElementById("comuna");
+
+        if (!region.value) { mostrarError("region", "La región es requerida."); valido = false; } else { limpiarError("region"); }
+        if (!comuna.value) { mostrarError("comuna", "La comuna es requerida."); valido = false; } else { limpiarError("comuna"); }
+
+        const mensaje = document.getElementById("mensaje-registro");
+
+        if (!valido) {
+            mensaje.textContent = "Revisa los campos marcados antes de continuar.";
+            return;
+        }
+
+        const resultado = registrarUsuario({
+            run: document.getElementById("run").value.trim().toUpperCase(),
+            nombre: document.getElementById("nombre").value.trim(),
+            apellidos: document.getElementById("apellidos").value.trim(),
+            correo: document.getElementById("correo").value.trim().toLowerCase(),
+            contrasena: document.getElementById("contrasena").value,
+            fechaNacimiento: document.getElementById("fechaNacimiento").value,
+            tipo: "Cliente",
+            region: region.value,
+            comuna: comuna.value,
+            direccion: document.getElementById("direccion").value.trim()
+        });
+
+        mensaje.textContent = resultado.mensaje;
+
+        if (resultado.exito) {
+            formulario.reset();
+            cargarRegiones();
+        }
+    });
+});
+</script>
+<script src="js/header.js"></script><script src="js/favoritos.js"></script><script src="js/menu.js"></script></body>
+</html>
