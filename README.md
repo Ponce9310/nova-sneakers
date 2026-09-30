@@ -1,4 +1,4 @@
-# NOVA SNEAKERS — Versión V19 — Catálogo y experiencia de compra
+# NOVA SNEAKERS — Catálogo y experiencia de compra
 
 Proyecto académico DSY1104.
 
